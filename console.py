@@ -4,17 +4,15 @@
 
 import cmd
 from datetime import datetime
-from models import storage
-from models.shipment import Shipment
-from models.offer import Offer
-from models.user import User
+from models import Shipment, Offer, User
+from models.base_model import BaseModel
 import shlex  # for splitting the line along spaces except in double quotes
 
 classes = {"Shipment": Shipment, "Offer": Offer, "User": User}
 
 
 class FreightCommand(cmd.Cmd):
-    """ Freight console """
+    """ Freight Console """
     prompt = '(freight) '
 
     def do_EOF(self, arg):
@@ -22,7 +20,7 @@ class FreightCommand(cmd.Cmd):
         return True
 
     def emptyline(self, arg):
-        """ Overwriting the emptyline method """
+        """Overwriting the emptyline method"""
         return False
 
     def do_quit(self, arg):
@@ -42,84 +40,82 @@ class FreightCommand(cmd.Cmd):
                 else:
                     try:
                         value = int(value)
-                    except:
+                    except ValueError:
                         try:
                             value = float(value)
-                        except:
+                        except ValueError:
                             continue
                 new_dict[key] = value
         return new_dict
 
-    # Create commands for Shipment model
-
-    def do_create_shipment(self, arg):
-        """Creates a new shipment"""
+    def do_create(self, arg):
+        """Creates a new instance of a class (Shipment, Offer, User)"""
         args = arg.split()
-        if not args:
-            print("** shipment details missing **")
-            return
-        new_dict = self._key_value_parser(args)
-        user_id = new_dict.pop('user_id', None)  # Extract and validate user_id
-        if not user_id:
-            print("** user_id is required **")
-            return
-        if not storage.get(User, user_id):
-            print("** Invalid user_id provided **")
-            return
-        shipment = Shipment(**new_dict)
-        shipment.user_id = user_id
-        shipment.save()
-        print(f"Shipment created: {shipment.id}")
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
 
-    def do_show_shipment(self, arg):
-        """Shows a shipment based on its ID"""
-        shipment = storage.get(Shipment, arg)
-        if not shipment:
-            print("** Shipment not found **")
-            return
-        print(shipment)
+        if args[0] in classes:
+            new_dict = self._key_value_parser(args[1:])
+            instance = classes[args[0]](**new_dict)
+            instance.save()
+            print(f"{args[0]} created: {instance.id}")
+        else:
+            print("** class doesn't exist **")
+            return False
 
-    def do_all_shipments(self, arg):
-        """Prints all shipments"""
-        shipments = storage.all(Shipment)
-        if not shipments:
-            print("** No shipments found **")
-            return
-        print("[", end="")
-        print(", ".join(str(shipment) for shipment in shipments), end="")
-        print("]")
-
-    def do_update_shipment(self, arg):
-        """Updates a shipment based on its ID and attributes"""
+    def do_show(self, arg):
+        """Prints an instance as a string based on the class and id"""
         args = shlex.split(arg)
-        if len(args) < 2:
-            print("** Insufficient arguments **")
-            return
-        shipment_id = args[0]
-        shipment = storage.get(Shipment, shipment_id)
-        if not shipment:
-            print("** Shipment not found **")
-            return
-        for attr, value in zip(args[1::2], args[2::2]):
-            if not hasattr(shipment, attr):
-                print(f"** Invalid attribute: {attr} **")
-                continue
-            setattr(shipment, attr, value)
-        shipment.save()
-        print(f"Shipment {shipment_id} updated")
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
 
-    def do_destroy_shipment(self, arg):
-        """Deletes a shipment based on its ID"""
-        shipment = storage.get(Shipment, arg)
-        if not shipment:
-            print("** Shipment not found **")
-            return
-        storage.delete(shipment)
-        storage.save()
-        print(f"Shipment {arg} deleted")
+        if args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
+                instance = models.storage.get(classes[args[0]], args[1])
+                if instance:
+                    print(instance)
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
-    # Create commands for Offer model (similar structure as Shipment)
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class and id"""
+        args = shlex.split(arg)
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
+                instance = models.storage.get(classes[args[0]], args[1])
+                if instance:
+                    models.storage.delete(instance)
+                    models.storage.save()
+                    print(f"{args[0]} deleted.")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
-    def do_create_offer(self, arg):
-        """Creates a new offer for a shipment"""
-        # ... (implement similar logic as create_shipment)
+    def do_all(self, arg):
+        """Prints string representations of instances"""
+        args = shlex.split(arg)
+        obj_list = []
+        if len(args) == 0:
+            obj_dict = models.storage.all()
+        elif args[0] in classes:
+            obj_dict = models.storage.all(classes[args[0]])
+        else:
+            print("** class doesn't exist **")
+            return False
+        for instance in obj_dict.values():
+            obj_list.append(str(instance))
+        print("[", end="")
+        print(", ".join(obj_list), end="")
