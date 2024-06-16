@@ -1,10 +1,12 @@
 #!/usr/bin/python3
+"""This module defines the shipment class of Easy Freieght"""
 
 from datetime import datetime
 
 class Shipment(BaseModel):
     """
-    Represents a shipment in the freight app.
+    Represents a shipment in the system with various attributes.
+    Inherits from BaseModel for common attributes and methods.
     """
 
     id = str  # Shipment ID (primary key)

@@ -1,10 +1,12 @@
 #!/usr/bin/python3
+"""This module defines the offer class for Easy Freight"""
 
 from datetime import datetime
 
 class Offer(BaseModel):
     """
     Represents an offer made by a carrier for a shipment.
+    Inherits from BaseModel for common attributes and methods.
     """
 
     id = str  # Offer ID (primary key)
