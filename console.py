@@ -1,19 +1,29 @@
 #!/usr/bin/python3
 
-""" Console for the freight website """
+"""This module defines the entry point of the command interpreter/Console:
+   Which ables to manage the objects of our Easy Freight project.
+"""
 
 import cmd
 from datetime import datetime
-from models import Shipment, Offer, User
+import models
 from models.base_model import BaseModel
+from models.user import User
+from models.shipment import Shipment
+from models.offer import Offer
+from models.vehicle import Vehicle
 import shlex  # for splitting the line along spaces except in double quotes
 
-classes = {"Shipment": Shipment, "Offer": Offer, "User": User}
+classes = {"User": User,
+           "BaseModel": BaseModel,
+           "Shipment": Shipment,
+           "Offer": Offer,
+           "Vehicle": Vehicle}
 
 
 class FreightCommand(cmd.Cmd):
-    """ Freight Console """
-    prompt = '(freight) '
+    """Commmand interpreter/Console for Easy Freight"""
+    prompt = '(easy-freight) '
 
     def do_EOF(self, arg):
         """Exits console"""
@@ -49,7 +59,7 @@ class FreightCommand(cmd.Cmd):
         return new_dict
 
     def do_create(self, arg):
-        """Creates a new instance of a class (Shipment, Offer, User)"""
+        """Creates a new instance of a class (User, Shipment, Offer, Vehicle)"""
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
