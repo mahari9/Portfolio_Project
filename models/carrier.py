@@ -32,9 +32,7 @@ class Carrier(BaseModel, Base):
         vehicles = relationship("Vehicle",
                               backref="Carrier",
                               cascade="all, delete, delete-orphan")
-        offers = relationship("Offer",
-                            backref="offer",
-                            cascade="all, delete, delete-orphan")
+        offers = relationship("Offer", backref="offer")
         shipments = relationship("Shipment", backref="shipment")
 
     else:    
@@ -88,14 +86,3 @@ class Carrier(BaseModel, Base):
                 if carrier.vehicle_id == self.id:
                     vehicle_list.append(vehicle)
             return vehicle_list
-
-    if(models.storage_t != "db"):
-        @property
-        def offers(self):
-            """getter for list of offer instances related to the carrier"""
-            offer_list = []
-            all_offers = models.storage.all(Offer)
-            for offer in all_offers.values():
-                if carrier.offer_id == self.id:
-                    offer_list.append(offer)
-            return offer_list

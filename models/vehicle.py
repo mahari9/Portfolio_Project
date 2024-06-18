@@ -17,15 +17,16 @@ class Vehicle(BaseModel, Base):
     if models.storage_t == "db":
         __tablename__ = 'vehicles'
         name = Column(String(128), nullable=False)
-        user_id = Column(String(128), nullable=False)    
+        carrier_id = Column(String(128), nullable=False)    
         model = Column(String(128), nullable=True)    
         capacity = Column(Float, nullable=False)
         plate_number = Column(String(128), nullable=False)
         colour = Column(String(128), nullable=False)
+        offers = relationship("Offer", backref="offer")
         
     else:
         name = ""
-        user_id = "" 
+        carrrier_id = "" 
         model = ""    
         capacity = 0.0
         plate_number = ""
