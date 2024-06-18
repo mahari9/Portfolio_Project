@@ -27,7 +27,7 @@ class Shipment(BaseModel, Base):
    
     if models.storage_t == 'db':
         __tablename__ = 'places'
-        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        shipper_id = Column(String(60), ForeignKey('shipper_id'), nullable=False)
         origin = Column(String(128), nullable=False)
         destination = Column(String(128), nullable=False)
         cargo_type = Column(String(128), nullable=False)
@@ -35,13 +35,14 @@ class Shipment(BaseModel, Base):
         description = Column(String(1024), nullable=True)
         desired_vehicle = Column(String(128), nullable=True)
         status = Column(String(128), nullable=False) # Status (Open/Quoted/Booked/Completed/Cancelled)
+        carrier_id = Column(String(60), ForeignKey('carrier_id'), nullable=True)
         offers = relationship("Offer",
                                backref="Shipment",
                                cascade="all, delete, delete-orphan")
        
 
     else:
-        user_id = ""
+        shipper_id = ""
         origin = ""
         destination = ""
         cargo_type = ""
@@ -49,6 +50,7 @@ class Shipment(BaseModel, Base):
         description = ""
         desired_vehicle = ""
         status = ""
+        carrier_id = ""
 
     def __init__(self, *args, **kwargs):
         """

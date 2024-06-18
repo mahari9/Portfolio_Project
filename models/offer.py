@@ -17,18 +17,19 @@ class Offer(BaseModel, Base):
     if models.storage_t == 'db':
         __tablename__ = 'offers'
         shipment_id = Column(String(60), ForeignKey('shipment_id'), nullable=False)
-        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        carrier_id = Column(String(60), ForeignKey('carrier.id'), nullable=False)
+        vehicle_id = Column(String(60), ForeignKey('vehicle.id'), nullable=False)
         price = Column(Float, nullable=False)
         estimated_delivery_time = Column(Integer, nullable=False)
         submitted_at = Column(datetime, nullable=False)
 
     else:
-        id = ""  # Offer ID (primary key)
-        shipment_id = ""  # Shipment ID (foreign key references Shipment.id)
-        carrier_id = ""  # Carrier ID (foreign key references User.id)
-        price = 0.0  # Price offered by the carrier
-        estimated_delivery_time = 0  # Estimated delivery time in days
-        submitted_at = ""  # Submission Date
+        shipment_id = ""
+        carrier_id = ""
+        vehicle_id = ""
+        price = 0.0
+        estimated_delivery_time = 0
+        submitted_at = ""
 
     def __init__(self, *args, **kwargs):
         """
