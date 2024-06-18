@@ -5,7 +5,17 @@
 """
 
 from datetime import datetime
+import models
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, DateTime
+from sqlalchemy.ext.declarative import declarative_base
 import uuid
+
+if models.storage_t == "db":
+    Base = declarative_base()
+else:
+    Base = object
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -14,6 +24,11 @@ class BaseModel:
        It includes id, created_at, and updated_at attributes with automatic
        handling.
     """
+
+     if models.storage_t == "db":
+        id = Column(String(60), primary_key=True)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        updated_at = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """
@@ -57,9 +72,8 @@ class BaseModel:
         """
         self.updated_at = datetime.utcnow()
         try:
-            from storage import storage
-            storage.new(self)
-            storage.save()
+            models.storage.new(self)
+            models.storage.save()
         except ImportError:
             raise NotImplementedError("storage module not implemented")
 
@@ -85,7 +99,6 @@ class BaseModel:
             NotImplementedError: If the storage module is not implemented.
         """
         try:
-            from models.storage import storage
-            storage.delete(self)
+            models.storage.delete(self)
         except ImportError:
             raise NotImplementedError("storage module not implemented")
