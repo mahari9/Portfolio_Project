@@ -1,22 +1,35 @@
 #!/usr/bin/python3
 """This module defines the vehicle class for Easy Freight"""
 
-from base_model import BaseModel
-from user import User
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, Float, ForeignKey
+from sqlalchemy.orm import relationship
 
-class Vehicle(BaseModel):
+class Vehicle(BaseModel, Base):
     """
     Represents a carrier's vehicle with various attributes.
     Inherits from BaseModel for common attributes and methods.
     """
     
-    
-    vehicle_id = str # Unique identifier for the vehicle, primary key    
-    carrier_id = str # Identifier of the carrier who owns this vehicle, foreign key    
-    model = str # Model of the vehicle    
-    capacity = float # Capacity of the vehicle in terms of weight it can carry
-    plate_number = str  # License plate number of the vehicle
-    colour = str  # Color of the vehicle
+    if models.storage_t == "db":
+        __tablename__ = 'vehicles'
+        name = Column(String(128), nullable=False)
+        user_id = Column(String(128), nullable=False)    
+        model = Column(String(128), nullable=True)    
+        capacity = Column(Float, nullable=False)
+        plate_number = Column(String(128), nullable=False)
+        colour = Column(String(128), nullable=False)
+        
+    else:
+        name = ""
+        user_id = "" 
+        model = ""    
+        capacity = 0.0
+        plate_number = ""
+        colour = ""
     
    def __init__(self, *args, **kwargs):
         """

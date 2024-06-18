@@ -1,11 +1,16 @@
 #!/usr/bin/python3
 """ This module defines the User class of Easy Freight"""
 
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, Bool
+from sqlalchemy.orm import relationship
 from datetime import datetime
-import uuid
-from passlib.hash import bcrypt  # Secure password hashing
+from hashlib import md5
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """
     Represents a user entity within the Easy Freight website.
 
@@ -17,18 +22,28 @@ class User(BaseModel):
         is_carrier (bool): Whether the user is a carrier (True) or a customer (False).
         business_license (str, optional): The carrier's business license number (if applicable).
         truck_plate_number (str, optional): The carrier's truck plate number (if applicable).
-        id (str): Unique identifier for the user (generated automatically).
-        created_at (datetime): Timestamp of user creation.
-        updated_at (datetime): Timestamp of last user update.
-    """
 
-    full_name = str
-    email = str
-    phone_number = str
-    password = str
-    is_carrier = bool
-    business_license = str  # Optional, only for carriers
-    truck_plate_number = str  # Optional, only for carriers
+    """
+    if models.storage_t == 'db':
+        __tablename__ = 'users'
+        email = Column(String(128), nullable=False)
+        phone_number = Column(String(128), nullable=False)
+        password = Column(String(128), nullable=False)
+        full_name = Column(String(256), nullable=True)
+        is_carrier = Column(Bool, nullable=True)
+        business_license = Column(String(128), nullable=True)  # Optional, only for carriers
+        truck_plate_number = Column(String(128), nullable=True)
+        offers = relationship("Offer", backref="offer")
+        shipments = relationship("Shipment", backref="shipment")
+
+    else:    
+        email = ""
+        phone_number = ""
+        password = ""
+        full_name = ""
+        is_carrier = Bool
+        business_license = ""
+        truck_plate_number = ""
 
     def __init__(self, *args, **kwargs):
         """
@@ -37,36 +52,29 @@ class User(BaseModel):
         Args:
             *args: Positional arguments passed to the BaseModel constructor.
             **kwargs: Keyword arguments passed to the BaseModel constructor.
-
-        If no ID is provided, a unique ID is generated using uuid.uuid4().
-        Sets the created_at and updated_at timestamps to the current datetime.
         """
-
         super().__init__(*args, **kwargs)
-        if not self.id:
-            self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
 
-    def set_password(self, password):
+    def __setattr__(self, name, value):
         """
         Sets the user's password securely using bcrypt hashing.
-
         Args:
             password (str): The user's plain text password.
         """
 
-        self.password = bcrypt.hash(password)  # Hash password securely
+        if name == "password":
+            value = md5(value.encode()).hexdigest() # Hash password securely
+        super().__setattr__(name, value)
 
-    def verify_password(self, password):
+    def __setattr__(self, name, value):
         """
         Verifies the user's password using bcrypt comparison.
-
         Args:
             password (str): The plain text password to compare.
-
         Returns:
             bool: True if the password matches, False otherwise.
         """
 
-        return bcrypt.verify(password, self.password)  # Securely compare passwords
+        if name == "password verify":
+            value = md5(value.encode()).hexdigest() # Securely compare passwords
+        super().__setattr__(name, value)
