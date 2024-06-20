@@ -24,8 +24,7 @@ class BaseModel:
        It includes id, created_at, and updated_at attributes with automatic
        handling.
     """
-
-     if models.storage_t == "db":
+    if models.storage_t == "db":
         id = Column(String(60), primary_key=True)
         created_at = Column(DateTime, default=datetime.utcnow)
         updated_at = Column(DateTime, default=datetime.utcnow)
