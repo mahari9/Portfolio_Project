@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ This module defines the registration/login for Easy Freight"""
 
-from user import User
+import models
+from models.user import User
 
 # Import a session management library (example using Flask-Session)
 from flask import session
