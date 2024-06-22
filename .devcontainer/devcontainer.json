@@ -6,10 +6,10 @@
 	"image":"mcr.microsoft.com/devcontainers/universal:2",
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {
-                   "azure-cli": "latest",
-                   "ghcr.io/devcontainers-contrib/features/coverage-py:2": {}
-           },
+	"features": {
+		"azure-cli": "latest",
+		"ghcr.io/devcontainers-contrib/features/coverage-py:2": {}
+	},
 
 	// Configure tool-specific properties.
 	"customizations": {
