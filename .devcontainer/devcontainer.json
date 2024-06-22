@@ -16,7 +16,6 @@
 		// Configure properties specific to VS Code.
 		"vscode": {
 			"settings": {
-				"python.defaultInterpreterPath": "/usr/local/bin/python3",
 				"python.linting.enabled": true
 			},
 
