@@ -22,15 +22,17 @@ class Vehicle(BaseModel, Base):
         capacity = Column(Float, nullable=False)
         plate_number = Column(String(128), nullable=False)
         color = Column(String(128), nullable=False)
+        price_per_km = Column(Float, nullable=False)
         offers = relationship("Offer", backref="offer")
         
     else:
         name = ""
-        carrier_id = "" 
-        model = ""    
+        carrier_id = ""
+        model = ""
         capacity = 0.0
         plate_number = ""
         color = ""
+        price_per_km = 0.0
         
     def __init__(self, *args, **kwargs):
         """

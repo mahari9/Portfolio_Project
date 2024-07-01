@@ -5,15 +5,18 @@
 """
 
 import cmd
+from datetime import datetime
 import models
 from models.base_model import BaseModel
-from models.user import User
+from models.carrier import Carrier
+from models.shipper import Shipper
 from models.shipment import Shipment
 from models.offer import Offer
 from models.vehicle import Vehicle
-import shlex  # for splitting the line along spaces except in double quotes
+import shlex 
 
-classes = {"User": User,
+classes = {"Shipper": Shipper,
+           "Carrier": Carrier,
            "BaseModel": BaseModel,
            "Shipment": Shipment,
            "Offer": Offer,
@@ -21,7 +24,7 @@ classes = {"User": User,
 
 
 class FreightCommand(cmd.Cmd):
-    """Commmand interpreter/Console for Easy Freight"""
+    """Command interpreter/Console for Easy Freight"""
     prompt = '(easy-freight) '
 
     def do_EOF(self, arg):
@@ -128,3 +131,38 @@ class FreightCommand(cmd.Cmd):
             obj_list.append(str(instance))
         print("[", end="")
         print(", ".join(obj_list), end="")
+
+    def do_update(self, arg):
+        """Update an instance based on the class name, id, attribute & value"""
+        args = shlex.split(arg)
+        floats = ["price_per_km"]
+        if len(args) == 0:
+            print("** class name missing **")
+        elif args[0] in classes:
+            if len(args) > 1:
+                k = args[0] + "." + args[1]
+                if k in models.storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            if args[0] == "Vehicle":
+                                if args[2] in floats:
+                                    try:
+                                        args[3] = float(args[3])
+                                    except:
+                                        args[3] = 0.0
+                            setattr(models.storage.all()[k], args[2], args[3])
+                            models.storage.all()[k].save()
+                        else:
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
+            
+
+if __name__ == '__main__':
+    FreightCommand().cmdloop()
