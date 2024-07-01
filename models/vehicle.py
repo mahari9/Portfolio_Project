@@ -21,18 +21,26 @@ class Vehicle(BaseModel, Base):
         model = Column(String(128), nullable=True)    
         capacity = Column(Float, nullable=False)
         plate_number = Column(String(128), nullable=False)
-        colour = Column(String(128), nullable=False)
+        color = Column(String(128), nullable=False)
         offers = relationship("Offer", backref="offer")
         
     else:
         name = ""
-        carrrier_id = "" 
+        carrier_id = "" 
         model = ""    
         capacity = 0.0
         plate_number = ""
-        colour = ""
-    
-   def __init__(self, *args, **kwargs):
+        color = ""
+        
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes an vehicle instance.
+
+        Args:
+            *args: Variable-length argument list (unused in this case).
+            **kwargs: Keyword argument dictionary containing vehicle attributes.
+        """
+        super().__init__(*args, **kwargs)
         """
         Initializes an vehicle instance.
 

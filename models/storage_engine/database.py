@@ -26,17 +26,17 @@ class DataBase:
 
     def __init__(self):
         """Instantiate a DataBase object"""
-        MYSQL_USER = getenv('MYSQL_USER')
-        MYSQL_PWD = getenv('MYSQL_PWD')
-        MYSQL_HOST = getenv('MYSQL_HOST')
-        MYSQL_DB = getenv('MYSQL_DB')
+        EF_MYSQL_USER = getenv('EF_MYSQL_USER')
+        EF_MYSQL_PWD = getenv('EF_MYSQL_PWD')
+        EF_MYSQL_HOST = getenv('EF_MYSQL_HOST')
+        EF_MYSQL_DB = getenv('EF_MYSQL_DB')
         EF_ENV = getenv('EF_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(MYSQL_USER,
-                                             MYSQL_PWD,
-                                             MYSQL_HOST,
-                                             MYSQL_DB))
-        if HBNB_ENV == "test":
+                                      format(EF_MYSQL_USER,
+                                             EF_MYSQL_PWD,
+                                             EF_MYSQL_HOST,
+                                             EF_MYSQL_DB))
+        if EF_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):

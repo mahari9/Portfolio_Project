@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This modlue defines the FileStorage class Easy Freight.
+This module defines the FileStorage class Easy Freight.
 """
 
 import json
