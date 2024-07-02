@@ -76,7 +76,7 @@ class Carrier(BaseModel, Base):
             value = md5(value.encode()).hexdigest() # Securely compare passwords
         super().__setattr__(name, value)
 
-     if(models.storage_t != "db"):
+    if models.storage_t != "db":
         @property
         def vehicles(self):
             """getter for list of vehicle instances related to the carrier"""
