@@ -70,8 +70,8 @@ class Shipper(BaseModel, Base):
         if name == "password verify":
             value = md5(value.encode()).hexdigest() # Securely compare passwords
         super().__setattr__(name, value)
-
-     if(models.storage_t != "db"):
+        
+    if models.storage_t != "db":
         @property
         def shipments(self):
             """getter for list of shipment instances related to the shipper"""
