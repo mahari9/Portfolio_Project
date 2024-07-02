@@ -24,6 +24,7 @@ class Carrier(BaseModel, Base):
     """
     if models.storage_t == 'db':
         __tablename__ = 'carriers'
+        full_name = Column(String(128), nullable=True)
         email = Column(String(128), nullable=False)
         phone_number = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
@@ -32,14 +33,12 @@ class Carrier(BaseModel, Base):
         vehicles = relationship("Vehicle",
                               backref="Carrier",
                               cascade="all, delete, delete-orphan")
-        offers = relationship("Offer", backref="offer")
-        shipments = relationship("Shipment", backref="shipment")
 
-    else:    
+    else: 
+        full_name = ""   
         email = ""
         phone_number = ""
         password = ""
-        full_name = ""
         business_license = ""
 
     def __init__(self, *args, **kwargs):

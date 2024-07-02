@@ -9,7 +9,7 @@ import models
 from models.base_model import BaseModel
 from models.storage_engine.database import DataBase
 from models.carrier import Carrier
-from models.shipper import Shipper
+from models.userport Shipper
 from models.shipment import Shipment
 from models.offer import Offer
 from models.vehicle import Vehicle

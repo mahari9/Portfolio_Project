@@ -4,19 +4,17 @@ Defines the class DataBase for Easy Freight.
 """
 
 import models
-from models.carrier import Carrier
 from models.base_model import BaseModel, Base
-from models.offer import Offer
-from models.shipper import Shipper
-from models.shipment import Shipment
-from models.vehicle import Vehicle
+from models.user import User
+from models.carrier import Carrier
+from models.user import Vehicle
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"Carrier": Carrier, "Offer": Offer,
-           "Shipper": Shipper, "Shipment": Shipment, "Vehicle": Vehicle}
+classes = {"Carrier": Carrier, "User": User,
+           "Vehicle": Vehicle}
 
 
 class DataBase:

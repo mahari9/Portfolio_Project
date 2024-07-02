@@ -6,14 +6,14 @@ This module defines the FileStorage class Easy Freight.
 import json
 import models
 from models.base_model import BaseModel
-from models.shipment import Shipment
-from models.offer import Offer
+from models.user import User
+from models.carrier import Carrier
 from models.vehicle import Vehicle
 from hashlib import md5
 
 classes = {"BaseModel": BaseModel,
-           "Shipment": Shipment,
-           "Offer": Offer,
+           "User": User,
+           "Carrier": Carrier,
            "Vehicle": Vehicle}
 
 class FileStorage:

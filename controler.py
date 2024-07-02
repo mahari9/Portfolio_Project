@@ -9,17 +9,13 @@ from datetime import datetime
 import models
 from models.base_model import BaseModel
 from models.carrier import Carrier
-from models.shipper import Shipper
-from models.shipment import Shipment
-from models.offer import Offer
+from models.userport User
 from models.vehicle import Vehicle
 import shlex 
 
-classes = {"Shipper": Shipper,
+classes = {"User": User,
            "Carrier": Carrier,
            "BaseModel": BaseModel,
-           "Shipment": Shipment,
-           "Offer": Offer,
            "Vehicle": Vehicle}
 
 
