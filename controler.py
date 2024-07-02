@@ -9,7 +9,7 @@ from datetime import datetime
 import models
 from models.base_model import BaseModel
 from models.carrier import Carrier
-from models.userport User
+from models.user import User
 from models.vehicle import Vehicle
 import shlex 
 
