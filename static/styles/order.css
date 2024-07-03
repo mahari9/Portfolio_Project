@@ -1,0 +1,85 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+  }
+  
+  main {
+    padding: 20px;
+  }
+
+  main h1 {
+    font-size: 2.5em;
+    text-align: center;
+  }
+  
+  .map-container {
+    margin-bottom: 30px;
+    width: 100%;
+  }
+  
+  .vehicle-type {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .vehicle-type h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .vehicle-carousel {
+    display: flex;
+    animation: slide 25s infinite linear;
+  }
+  
+  .vehicle-carousel img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    margin-right: 25px;
+    border-radius: 5px;
+  }
+  
+  .vehicle-card {
+    animation: bounce 5s infinite alternate ease-in-out;
+  }
+
+  .vehicle-card a {
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  
+  @keyframes slide {
+    from { transform: translateX(90%); }
+    to { transform: translateX(-90%); }
+  }
+  
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+  }
+  
+  /* Media Queries for Responsive Design */
+  
+  @media screen and (max-width: 768px) {
+    .vehicle-carousel img {
+      width: 150px;
+      height: 120px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 2em;
+    }
+    .vehicle-carousel img {
+      width: 100px;
+      height: 80px;
+    }
+  }
+  
