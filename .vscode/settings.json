@@ -7,5 +7,6 @@
         "pylance",
         "pylint",
         "yapf"
-    ]
+    ],
+    "editor.linkedEditing": true
 }
