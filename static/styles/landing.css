@@ -164,27 +164,55 @@ body {
 }
 
 .container {
-  width: 40%;
-  height: 400px;
+  width: 50%;
+  height: 350px;
   margin-top: 0px;
   padding: 20px;
-  background-color: #000000;
 }
-
 
 .about {
-  padding: 0px 0;
+  width: 100%;
+  height: 350px;
+  background-color: #98FB98;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.team {
+  width: 50%;
+  height: 350px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #daa520;
 }
 
+.team image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.team-member a {
+  text-decoration: none;
+}
+
+.team h2 {
+  padding-top: 10px;
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: bold;
+}
 .about h2 {
   font-size: 2em;
-  margin-bottom: 50px;
-  color: white;
+  color: #000000;
 }
 
 .about p {
   font-size: 1.2em;
-  color: white;
+  color: #000000;
 }
 
 .connected {
@@ -303,8 +331,21 @@ footer {
 	width: 100%;
 	border-top: none;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	flex-direction: row;
+  justify-content: center;
 	bottom: 0;
+}
+
+footer p {
+  color: #000000;
+  margin-right: 400px;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.social {
+  display: flex
+  align-items: right  ;
+
 }
