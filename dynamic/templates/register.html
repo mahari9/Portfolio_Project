@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Easy Freight - User Registration</title>
+  <link rel="stylesheet" type="text/css" href="styles/register.css"/>
+</head>
+<body>
+  <div class="container">
+    <h2>User Registration</h2>
+    <form action="/register" method="post">
+      <div class="form-groups">
+        <label for="fullname">Full Name:</label>
+        <input type="text" class="form-control" id="fullname" placeholder="Enter Full-name" name="fullname" required>
+        <br>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" class="form-control" id="phone" placeholder="Enter Your Phone" name="phone" required>
+        <br>
+        <label for="email">Email Address:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your Email" name="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="Put strong password" name="password" required>
+        <br>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Your Password" name="confirm_password" required>
+        <br>
+      </div>
+      <button type="submit">Register</button>
+      <p>Already have an account? <a href="login.html">Login</a></p>
+    </form>
+  </div>
+</body>
+</html>
