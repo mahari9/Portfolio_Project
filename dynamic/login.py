@@ -20,7 +20,7 @@ def close_db(error):
 
 @app.route('/')
 @app.route('/login', methods =['GET', 'POST'])
-def login():
+def Login():
     if request.method == 'POST' and ('email' in request.form or 'phone' in request.form) and 'password' in request.form:
         if 'email' in request.form:
             email = request.form['email']
@@ -48,7 +48,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('login.Login'))
 
 
 if __name__ == "__main__":

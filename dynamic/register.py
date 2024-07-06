@@ -18,7 +18,7 @@ def close_db(error):
     storage.close()
 
 @app.route('/register', methods =['GET', 'POST'])
-def register():
+def Register():
     if request.method == 'POST':
         email = request.form.get('email')
         phone = request.form.get('phone')
@@ -45,7 +45,7 @@ def register():
             storage.save()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('templates.vehicle'))
+            return redirect(url_for('templates.login'))
 
     return render_template("register.html", user=current_user)
     
