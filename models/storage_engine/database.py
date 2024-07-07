@@ -7,7 +7,7 @@ import models
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.carrier import Carrier
-from models.user import Vehicle
+from models.vehicle import Vehicle
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
