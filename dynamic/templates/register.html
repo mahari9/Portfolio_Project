@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Freight - User Registration</title>
-  <link rel="stylesheet" type="text/css" href="styles/register.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Freight - User Registration</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../static/scripts/101-hbnb.js?cache_id={{ cache_id }}"></script>
+    <link rel="stylesheet" type="text/css" href="styles/register.css"/>
 </head>
 <body>
-  <div class="container">
-    <h2>User Registration</h2>
-    <form action="/register" method="post">
-      <div class="form-groups">
-        <label for="fullname">Full Name:</label>
-        <input type="text" class="form-control" id="fullname" placeholder="Enter Full-name" name="fullname" required>
-        <br>
-        <label for="phone">Phone Number:</label>
-        <input type="tel" class="form-control" id="phone" placeholder="Enter Your Phone" name="phone" required>
-        <br>
-        <label for="email">Email Address:</label>
-        <input type="email" class="form-control" id="email" placeholder="Enter your Email" name="email" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" placeholder="Put strong password" name="password" required>
-        <br>
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm Your Password" name="confirm_password" required>
-        <br>
-      </div>
-      <button type="submit">Register</button>
-      <p>Already have an account? <a href="login.html">Login</a></p>
-    </form>
-  </div>
+    <div class="container">
+        <h2>Easy Freight Registration</h2>
+        {% with messages = get_flashes(with_categories=True) %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endwith %}
+        <form action="/register" method="POST" id="register-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" placeholder="Enter your email address" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number (Optional):</label>
+                <input type="tel" name="phone" id="phone" placeholder="Enter your phone number (10 or 15 digits)">
+            </div>
+            <div class="form-group">
+                <label for="full_name">Full Name:</label>
+                <input type="text" name="full_name" id="full_name" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="password1">Password:</label>
+                <input type="password" name="password1" id="password1" placeholder="Enter password" required>
+            </div>
+            <div class="form-group">
+                <label for="password2">Confirm Password:</label>
+                <input type="password" name="password2" id="password2" placeholder="Confirm password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+    <script src="static/scripts/register.js"></script>
 </body>
 </html>
