@@ -1,0 +1,108 @@
+#vehicle-details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #98FB98;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+  }
+
+  @media (max-width: 600px) {
+    #vehicle-details {
+      width: 95%; /* More screen width on smaller devices */
+      padding: 10px; /* Smaller padding on smaller devices */
+    }
+  
+    .vehicle-picture img {
+      width: 80px; /* Smaller images on smaller devices */
+      height: 80px;
+    }
+  
+    .form-group label {
+      width: auto; /* Allows the label to shrink on smaller screens */
+    }
+  
+    button[type="submit"] {
+      padding: 8px 16px; /* Smaller buttons on smaller devices */
+    }
+  }
+  
+  @media (max-width: 600px) {
+    #vehicle-details {
+      width: 95%; /* More screen width on smaller devices */
+      padding: 10px; /* Smaller padding on smaller devices */
+    }
+  
+    .vehicle-picture img {
+      width: 80px; /* Smaller images on smaller devices */
+      height: 80px;
+    }
+  
+    .form-group label {
+      width: auto; /* Allows the label to shrink on smaller screens */
+    }
+  
+    button[type="submit"] {
+      padding: 8px 16px; /* Smaller buttons on smaller devices */
+    }
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .vehicle-picture {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .vehicle-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .form-group label {
+    width: 80px;
+  }
+  
+  select, input[type="text"], input[type="number"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #0000FF;
+  }
+  
