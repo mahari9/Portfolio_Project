@@ -2,11 +2,11 @@
 
 ## Table of Content
 * [Introduction](#Introduction)
-* [Live Demo](#Live Demo)
+* [Live Demo](#Live-Demo)
 * [Installation](#Installation)
 * [Usage](#Usage)
 * [Contributing](#Contributing)
-* [ Related Projects](# Related-Projects)
+* [Related Projects](#Related-Projects)
 * [Project Blog](#Project-Blog)
 * [Authors](#Authors)
 * [Licensing](#Licensing)
