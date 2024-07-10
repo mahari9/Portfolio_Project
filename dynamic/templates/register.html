@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="styles/register.css"/>
 </head>
 <body>
+    <include src="header.html"></include>
+    
     <div class="container">
         <h2>Easy Freight Registration</h2>
         {% with messages = get_flashes(with_categories=True) %}
@@ -46,5 +48,7 @@
         </form>
     </div>
     <script src="static/scripts/register.js"></script>
+
+    <include src="footer.html"></include>
 </body>
 </html>
