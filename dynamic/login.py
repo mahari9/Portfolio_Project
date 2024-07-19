@@ -20,8 +20,7 @@ def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
-@app.route('/')
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
     if request.method == 'POST' and ('email' in request.form or 'phone' in request.form) and 'password' in request.form:
         try:
