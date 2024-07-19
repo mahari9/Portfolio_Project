@@ -29,7 +29,7 @@ class DataBase:
         EF_MYSQL_HOST = getenv('EF_MYSQL_HOST')
         EF_MYSQL_DB = getenv('EF_MYSQL_DB')
         EF_ENV = getenv('EF_ENV')
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+        self.__engine = create_engine('mysql+pymysql://{}:{}@{}/{}'.
                                       format(EF_MYSQL_USER,
                                              EF_MYSQL_PWD,
                                              EF_MYSQL_HOST,

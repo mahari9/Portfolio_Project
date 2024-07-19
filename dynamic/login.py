@@ -12,6 +12,9 @@ from sqlalchemy import or_
 
 app = Flask(__name__)
 
+# Create a blueprint for login-related routes
+login_bp = Blueprint('login', __name__)
+
 @app.teardown_appcontext
 def close_db(error):
     """ Remove the current SQLAlchemy Session """
@@ -39,7 +42,7 @@ def login():
 
     return render_template("login.html", user=current_user)  # Display login form for GET requests
 
-@login.route('/logout')
+@login_bp.route('/logout')
 @login_required
 def logout():
     logout_user()
