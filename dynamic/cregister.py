@@ -2,7 +2,7 @@
 """ Starts a Flash Web Application """
 
 from models import storage
-from models.user import User
+from models.user import Carrier
 from os import environ
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask import Flask
@@ -26,9 +26,9 @@ def Register():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
-        user = storage.all(User).filter(or_(User.email == "email",
-                                            User.phone == "phone")).first()
-        if user:
+        carrier = storage.all(Carrier).filter(or_(Carrier.email == "email",
+                                            Carrier.phone == "phone")).first()
+        if carrier:
             flash('Email/Phone already exists.', category='error')
         elif len(email) < 4 or len(phone) != (10 or 15):
             flash('Email/Phone must be > 3/10 or 15 chars', category='error')
@@ -39,15 +39,15 @@ def Register():
         elif len(password1) < 4:
             flash('Password must be at least 5 characters.', category='error')
         else:
-            new_user = User(email=email, phone=phone, full_name=full_name,
+            new_carrier = Carrier(email=email, phone=phone, full_name=full_name,
                             password=generate_password_hash(password1, method='sha256'))
-            storage.new(new_user)
+            storage.new(new_carrier)
             storage.save()
-            login_user(new_user, remember=True)
+            login_user(new_carrier, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('templates.login'))
+            return redirect(url_for('templates.clogin'))
 
-    return render_template("register.html", user=current_user)
+    return render_template("cregister.html", carrier=current_user)
     
 if __name__ == "__main__":
     """Register Function """
