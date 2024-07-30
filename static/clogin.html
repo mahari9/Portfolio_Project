@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Freight - User Login</title>
+  <title>Easy Freight - Carrier Login</title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../static/scripts/101-hbnb.js"></script>
+  <script type="text/javascript" src="../static/scripts/login.js"></script>
   <link rel="stylesheet" type="text/css" href="styles/header.css" />
   <link rel="stylesheet" type="text/css" href="styles/login.css" />
   <link rel="stylesheet" type="text/css" href="styles/footer.css" />
@@ -14,7 +14,7 @@
   <include src="header.html"></include>
   
   <div class="container">
-    <h2>User Login</h2>
+    <h2>Carrier Login</h2>
     <p>Welcome Back!</p>
     {% with messages = get_flashed_messages(with_categories=True) %}
         {% for category, message in messages %}
@@ -23,7 +23,7 @@
             </div>
         {% endfor %}
     {% endwith %}
-    <form action="/login" method="POST" id="login-form">
+    <form action="/clogin" method="POST" id="login-form">
       <div class="form-group">
           <label for="email">Email or Phone:</label>
           <input type="text" name="email" id="email" placeholder="Enter email or phone number" required>

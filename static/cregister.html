@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Freight - User Registration</title>
+    <title>Easy Freight - Carrier Registration</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../static/scripts/101-hbnb.js?cache_id={{ cache_id }}"></script>
+    <script type="text/javascript" src="../static/scripts/register.js?cache_id={{ cache_id }}"></script>
     <link rel="stylesheet" type="text/css" href="styles/header.css" />
     <link rel="stylesheet" type="text/css" href="styles/register.css"/>
     <link rel="stylesheet" type="text/css" href="styles/footer.css" />
@@ -22,7 +22,7 @@
         </div>
         {% endfor %}
         {% endwith %}
-        <form action="/register" method="POST" id="register-form">
+        <form action="/cregister" method="POST" id="register-form">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="text" name="email" id="email" placeholder="Enter your email address" required>
